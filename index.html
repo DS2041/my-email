@@ -1,100 +1,76 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ramicoin Email Assets</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      color: #222;
+      margin: 40px;
+      text-align: center;
+    }
+    h1 {
+      color: #26a17b;
+      margin-bottom: 30px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      justify-items: center;
+    }
+    .card {
+      background: white;
+      border-radius: 8px;
+      padding: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      transition: transform 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+    }
+    img {
+      max-width: 150px;
+      height: auto;
+      border-radius: 6px;
+    }
+    p {
+      font-size: 13px;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+  <h1>Ramicoin Email Assets</h1>
+  <p>All hosted image files below are accessible via <code>https://ramicoin.github.io/Email-Assets/filename.png</code></p>
+  
+  <div class="grid" id="image-grid"></div>
 
-<body style="margin: 0; padding: 0; background-color: #d9d9d9">
-    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #d9d9d9">
-        <tr>
-            <td align="center" style="padding: 30px 10px">
-                <!-- Email Card -->
-                <table width="600" cellpadding="0" cellspacing="0" border="0"
-                    style="background: #ffffff; border-radius: 8px;">
-                    <!-- Banner -->
-                    <tr>
-                        <td align="center">
-                            <img src="https://rawcdn.githack.com/ramicoin/Email-Assets/a3e01e68a544989183e34ab3f3201ae679f7129a/shaewithlogo.png"
-                                alt="Ramicoin Banner" width="600" style="display: block;">
-                        </td>
-                    </tr>
-
-                    <!-- Content -->
-                    <tr>
-                        <td
-                            style="padding: 40px 30px; font-family: Arial, sans-serif; font-size: 15px; line-height: 1.6;">
-                            <p>Dear Bscscan Team,</p>
-
-                            <p>Thank you for processing and publishing the Ramicoin logo update so swiftly. We
-                                appreciate the support your platform provides to builders and communities across the BNB
-                                Chain ecosystem.
-                            </p>
-
-                            <p>This update helps ensure users can identify our project with clarity and confidence. On
-                                behalf of the ramicoin's team and community, please accept our sincere thanks.</p>
-
-                            <!-- ICO -->
-                            <p style="color: #ff0000; text-decoration: none;">Also one important thing to add here - we
-                                have officially launched our ICO. We are
-                                looking to raise $5,000,000 for 20% equity (RAMICOIN) at a price of $0.005 per token.
-                            </p>
-
-                            <p style="color: #ff0000; text-decoration: none;">If there is anything that can help us make
-                                our vision a reality, we would greatly
-                                appreciate your support.</p>
-
-                            <p>Best regards,<br>
-                                <strong>Mitul Gadhiya</strong><br>
-                                Founder, CEO & CTO<br>
-                                <a style="color: #26a17b; text-decoration: none;" href="https://ramicoin.com">
-                                    www.ramicoin.com
-                                </a>
-                            </p>
-                        </td>
-                    </tr>
-
-                    <!-- Social Icons Box with Full Width and Centered Icons -->
-                    <tr>
-                        <td align="center" style="padding: 0 0 20px">
-                            <!-- Full width row -->
-                            <table width="94%" cellpadding="0" cellspacing="0" border="0" style="
-                    background: #d9d9d9;
-                    border-radius: 8px;
-                    padding: 20px 0;">
-                                <tr>
-                                    <td align="center">
-                                        <!-- Centered icons row -->
-                                        <table cellpadding="0" cellspacing="0" border="0">
-                                            <tr>
-                                                <td style="padding: 0 10px">
-                                                    <a href="https://t.me/ramicoin_ceo" target="_blank">
-                                                        <img src="https://rawcdn.githack.com/ramicoin/Email-Assets/5025b8f710b1406468f7a8ea68ed1e87d9f54d09/telegram.png"
-                                                            alt="Telegram" width="32" height="32"
-                                                            style="display: block" />
-                                                    </a>
-                                                </td>
-                                                <td style="padding: 0 10px">
-                                                    <a href="https://x.com/ramicoin_bnb" target="_blank">
-                                                        <img src="https://rawcdn.githack.com/ramicoin/Email-Assets/5025b8f710b1406468f7a8ea68ed1e87d9f54d09/x.png"
-                                                            alt="X" width="32" height="32" style="display: block" />
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-
-                    <!-- Footer -->
-                    <tr>
-                        <td align="center" style="padding: 20px; font-family: Arial; font-size: 13px; color: #999;">
-                            <a href="https://ramicoin.com"
-                                style="color: #26a17b; text-decoration: none;">ramicoin.com</a><br>
-                            <div style="margin-top: 8px">© 2025 Ramicoin. All rights reserved.</div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
+  <script>
+    // Auto-load all image files in the repo root (GitHub Pages supports direct file access)
+    const extensions = ['png','jpg','jpeg','svg','gif','webp'];
+    fetch(window.location.href)
+      .then(r => r.text())
+      .then(html => {
+        const matches = [...html.matchAll(/href="([^"]+)"/g)]
+          .map(m => m[1])
+          .filter(file => extensions.some(ext => file.endsWith(ext)));
+        const grid = document.getElementById('image-grid');
+        matches.forEach(file => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = `
+            <a href="${file}" target="_blank">
+              <img src="${file}" alt="${file}">
+            </a>
+            <p>${file}</p>
+          `;
+          grid.appendChild(card);
+        });
+      });
+  </script>
 </body>
-
 </html>
